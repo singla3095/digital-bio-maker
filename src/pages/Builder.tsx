@@ -9,6 +9,7 @@ import { EducationForm } from "@/components/builder/EducationForm";
 import { ProjectsForm } from "@/components/builder/ProjectsForm";
 import { SkillsForm } from "@/components/builder/SkillsForm";
 import { ContactForm } from "@/components/builder/ContactForm";
+import { LinkedInImport } from "@/components/builder/LinkedInImport";
 import { PortfolioPreview } from "@/components/preview/PortfolioPreview";
 import { PortfolioData } from "@/types/portfolio";
 
@@ -46,6 +47,17 @@ const Builder = () => {
     link.click();
   };
 
+  const handleLinkedInImport = (importedData: Partial<PortfolioData>) => {
+    setPortfolioData({
+      profile: importedData.profile || portfolioData.profile,
+      experience: importedData.experience || portfolioData.experience,
+      education: importedData.education || portfolioData.education,
+      projects: importedData.projects || portfolioData.projects,
+      skills: importedData.skills || portfolioData.skills,
+      contact: importedData.contact || portfolioData.contact,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-secondary to-background">
       <header className="border-b bg-card/80 backdrop-blur-sm sticky top-0 z-50 shadow-soft">
@@ -54,6 +66,7 @@ const Builder = () => {
             Portfolio Builder
           </h1>
           <div className="flex gap-2">
+            <LinkedInImport onImport={handleLinkedInImport} />
             <Button
               variant={activeView === "edit" ? "default" : "outline"}
               size="sm"
